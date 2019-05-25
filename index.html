@@ -6,16 +6,113 @@
   <title>Hecrepedia | Animals</title>
   <script type="text/javascript" src="/docs/js/jquery.js" defer></script>
   <script type="text/javascript" src="/docs/js/main.js" defer></script>
+  <script type="text/javascript" src="/docs/js/animal.js" defer></script>
   <link rel="stylesheet" type="text/css" href="/docs/css/turtle.css">
+  <link rel="stylesheet" type="text/css" href="/docs/fa/css/all.css">
+  <style>
+    .content:first-child li {
+      padding: 1vw
+    }
+
+    .content:first-child ul img {
+      width: 75%;
+      padding: 12.5%;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      display: block;
+      transition: 0.3s
+    }
+
+    .content:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content:nth-child(2) div:not(:first-child) {
+      margin-top: 16px
+    }
+
+    .myVisible {
+      transform: rotate(360deg)
+    }
+
+    #images {
+      position: relative;
+      overflow: scroll;
+    }
+
+    #images img {
+      width: auto;
+      width: 100%;
+      margin: auto
+    }
+
+    #images i {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      padding: 8px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      color: #fff;
+      cursor: pointer
+    }
+
+    #tab {
+      justify-content: space-around;
+      padding: 4px
+    }
+
+    #tab i {
+      color: #3a3a3a;
+      padding: 8px;
+      transition: 0.3s
+    }
+
+    #tab .active {
+      color:#5bbbff
+    }
+
+    #text {
+      margin-bottom: 16px;
+      flex-grow: 1
+    }
+
+    #text div {
+      display: none
+    }
+
+    #text div.active {
+      display: block
+    }
+  </style>
 </head>
 <body>
   <nav></nav>
   <div class="grid" style="height:calc(100vh - 83px)">
-    <div class="content shadow col-1-3 row-1-13 scroll">
-      <ul>
+    <div class="content shadow col-1-3 row-1-13 scroll-y">
+      <ul class="no-style">
       </ul>
     </div>
-    <div class="content shadow col-3-13 row-1-13">
+    <div class="content col-3-13 row-1-13" style="padding-right: 16px">
+      <div class="card shadow" id="images">
+        <i class="fas fa-angle-double-right fa-2x"></i>
+      </div>
+      <div id="name">
+      </div>
+      <div class="card shadow flex" id="tab">
+        <i class="fas fa-info-circle active" onclick="switchTab(this, 1)"></i>
+        <i class="fas fa-user" onclick="switchTab(this, 2)"></i>
+        <i class="fas fa-clock" onclick="switchTab(this, 3)"></i>
+        <i class="fas fa-fist-raised" onclick="switchTab(this, 4)"></i>
+        <i class="fas fa-question" onclick="switchTab(this, 5)"></i>
+      </div>
+      <div class="card shadow scroll-y paddings" id="text">
+        <div class="active"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   </div>
 </body>
