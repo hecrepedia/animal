@@ -32,7 +32,8 @@ function extractInformation(source, listNum) {
 
 
 function createAnimalList(info, listNum) {
-  $("#list ul li:nth-child(" + listNum + ")").append("<img src='" + info[8][0] + "' onclick='switchAnimal(" + listNum + "," + JSON.stringify(info) + ", this)'>")
+  $("#list ul li:nth-child(" + listNum + ")").append("<img src=" + info[8][0] + " onclick=\"\">");
+  $("#list ul li:nth-child(" + listNum + ") img").attr("onclick", "switchAnimal(" + listNum + "," + JSON.stringify(info) + ", this)")
 }
 
 function switchAnimal(number, info, obj) {
