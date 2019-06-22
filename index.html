@@ -25,9 +25,8 @@
 
     #list {
       transition: 0.3s;
-      right: 100%;
-      background-color: #f55;
-      border-radius: 4px
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25)
     }
 
     #list ul {
@@ -104,46 +103,40 @@
 </head>
 <body>
   <nav></nav>
-  <div class="grid-12-12 position-fixed" style="width:100%;height:calc(100vh - 83px)" id="list">
-    <div class="content shadow grid-col-11-13 grid-row-1-13 position-relative" style="overflow-y:scroll;right:calc(calc(100vw - 72px) / -6)">
+  <div class="" style="width:12%;height:calc(100vh - 83px);position:fixed;left:0;overflow-y:scroll" id="list">
         <ul class="no-style">
         </ul>
-    </div>
   </div>
-  <div class="grid-12-12" style="min-height:calc(100vh - 83px)" id="info">
-    <div class="content grid-col-3-13 grid-row-1-13" style="padding-right: 16px">
-      <div style="display:flex;flex-direction:column">
-        <div class="card position-relative" id="images">
-          <img src="/images/other_creatures/question_mark.jpg" class="show">
-        </div>
-        <div id="name">
-          <h1>This is the animal's name</h1>
-          <p>This will have the pronunciaiton</p>
-        </div>
-        <div class="card shadow flex justify-content-space-around" id="tab" style="padding:4px">
-          <i class="fas fa-info-circle active" onclick="switchTab(this, 1)"></i>
-          <i class="fas fa-user" onclick="switchTab(this, 2)"></i>
-          <i class="fas fa-clock" onclick="switchTab(this, 3)"></i>
-          <i class="fas fa-fist-raised" onclick="switchTab(this, 4)"></i>
-          <i class="fas fa-question" onclick="switchTab(this, 5)"></i>
-        </div>
-        <div class="card shadow scroll-y paddings" id="text">
-          <div class="active">
-            <p>This tab is the bio.</p>
-          </div>
-          <div>
-            <p>This tab is personality.</p>
-          </div>
-          <div>
-            <p>This tab is history.</p>
-          </div>
-          <div>
-            <p>This tab shows powers; powers are not available yet.</p>
-          </div>
-          <div>
-            <p>This tab shows trivia.</p>
-          </div>
-        </div>
+  <div class="grid" style="width:calc(88% - 32px);position:absolute;right:0;padding: 0 16px 0 16px" id="info">
+    <div class="grid-col-12 shadow bor-rad-2" id="images" style="overflow:hidden;position:relative">
+      <img src="/images/other_creatures/question_mark.jpg" class="show">
+    </div>
+    <div id="name" class="grid-col-12">
+      <h1>This is the animal's name</h1>
+      <p>This will have the pronunciaiton</p>
+    </div>
+    <div class="grid-col-12 flex jus-spa shadow bor-rad-2" id="tab" style="padding:4px;margin-bottom:16px">
+      <i class="fas fa-info-circle active" onclick="switchTab(this, 1)"></i>
+      <i class="fas fa-user" onclick="switchTab(this, 2)"></i>
+      <i class="fas fa-clock" onclick="switchTab(this, 3)"></i>
+      <i class="fas fa-fist-raised" onclick="switchTab(this, 4)"></i>
+      <i class="fas fa-question" onclick="switchTab(this, 5)"></i>
+    </div>
+    <div class="grid-col-12 shadow bor-rad-2" id="text">
+      <div class="active">
+        <p>This tab is the bio.</p>
+      </div>
+      <div>
+        <p>This tab is personality.</p>
+      </div>
+      <div>
+        <p>This tab is history.</p>
+      </div>
+      <div>
+        <p>This tab shows powers; powers are not available yet.</p>
+      </div>
+      <div>
+        <p>This tab shows trivia.</p>
       </div>
     </div>
   </div>

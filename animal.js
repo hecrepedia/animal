@@ -1,3 +1,8 @@
+if ($(window).width() >= 1080) {
+  regroup(1);
+}
+
+
 getSources();
 
 function getSources() {
@@ -81,4 +86,13 @@ function switchTab(obj, x) {
   $(obj).addClass("active");
   $("#text div").removeClass("active");
   $("#text div:nth-child(" + x + ")").addClass("active");
+}
+
+function regroup(type) {
+  if (type == 1) { // Larger Screen
+    $("div:nth-child(2) div").removeClass("grid-col-11-13").addClass("grid-col-12-13");
+    $("div:nth-child(2) div").attr("style", "overflow-y:scroll;right:calc(calc(100vw - 72px) / -7)")
+  } else { // Smaller Screen
+
+  }
 }
