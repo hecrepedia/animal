@@ -1,5 +1,5 @@
-if ($(window).width() >= 1080) {
-  regroup(1);
+if ($(window).width() >= 720) {
+  layout("computer");
 }
 
 
@@ -88,11 +88,9 @@ function switchTab(obj, x) {
   $("#text div:nth-child(" + x + ")").addClass("active");
 }
 
-function regroup(type) {
-  if (type == 1) { // Larger Screen
-    $("div:nth-child(2) div").removeClass("grid-col-11-13").addClass("grid-col-12-13");
-    $("div:nth-child(2) div").attr("style", "overflow-y:scroll;right:calc(calc(100vw - 72px) / -7)")
-  } else { // Smaller Screen
-
+function layout(type) {
+  if (type == "computer") { // Larger Screen
+    $("#images").attr("style", "width:calc(50% - 16px);float:left;margin-bottom:16px");
+    $("#info > div:nth-child(2)").attr("style", "width:calc(50% - 16px);float:right;margin-bottom:16px");
   }
 }
