@@ -22,6 +22,7 @@
     /* Dynamic List Content Styling */
     #list div{width:100%;max-width:64px;padding:8%}
     #list div img{width:75%;padding:12.5%;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.25);transition:0.3s;background-color:#fff}
+    #list div.hidden{display:none}
     .myVisible{transform:rotate(360deg)}
 
     /* Images */
@@ -45,7 +46,7 @@
 
     /* List Styling */
     #list-container.open{width:12%;height:calc(100vh - 83px);max-width:64px;z-index:1}
-    #list-container.close{width:100%;bottom:0;top:0;background-color:#FF8F32;z-index:6;overflow-y:hidden}
+    #list-container.close{width:100%;bottom:0;top:0;background-color:#FF8F32;z-index:6;overflow-y:auto}
     #list-container.close #list{justify-content:flex-start}
     #list-container.close #list div{padding:8px}
 
@@ -70,10 +71,10 @@
     #list-container.close .menu-bars hr:last-child {transform:translateY(-12px)translateX(2px)rotate(45deg)}
 
     /* Filter (Icon) */
-    #filter {bottom:0;right:0;display:none;border-radius:4px 0 0 0}
-    #list-container.close #filter {display:block;}
+    #filter {bottom:0;right:0;display:none;border-radius:4px 0 0 0;z-index:7}
+    #filter.open {display:block;}
     /* Filters (List) */
-    #filters {right:80px;bottom:-170px;transition:0.3s;width:calc(100vw - 96px);border-radius:0 4px 0 0}
+    #filters {right:80px;bottom:-217.6px;transition:0.3s;width:calc(100vw - 96px);border-radius:0 4px 0 0}
     #filters.open {bottom:0}
     #filters ul {flex-direction:column;list-style:none}
     #filters li {margin:8px;padding:8px;font-family:sans-serif;border-radius:8px;background-color:#FF8F32;box-shadow: 0 1px 3px rgba(0,0,0,0.25)}
@@ -88,43 +89,47 @@
   <nav></nav>
   <!-- List -->
   <div class="open pos-fx ovfl-y-scrl shadow bckg-gray-1" style="left:0;flex-wrap:wrap" id="list-container">
-    <div class="flex pos-rel" id="list" style="flex-wrap:wrap">
-      <div class="menu-bars flex" onclick="toggle('#list-container')">
+    <div class="flex" id="list" style="flex-wrap:wrap">
+      <div class="menu-bars flex" onclick="toggle('#list-container');toggle('#filter')">
         <hr>
         <hr>
         <hr>
       </div>
     </div>
-    <div id="filter" class="pos-abs shadow bckg-gray-1">
-      <i class="fas fa-filter txt-orange-2 fa-2x pad-3" onclick="toggle('#filters');openFilter(0)"></i>
-      <div id="filters" class="close pos-abs bckg-gray-1 txt-gray-1 shadow pad-2">
-        <ul class="flex mar-0 pad-0">
-          <!-- Sort -->
-          <li onclick="openFilter(1)">Sort</li>
-          <div class="close bckg-gray-1 pad-2" id="sort-filter" style="top:-108.8px;left:-177px">
-            <ul class="mar-0 pad-0">
-              <li onclick="sort(1)">Hecredex Order</li>
-              <li onclick="sort(2)">Reverse Order</li>
-            </ul>
-          </div>
-          <!-- Bird Filters -->
-          <li onclick="openFilter(2)">Hecretary Birds</li>
-          <div class="close bckg-gray-1 pad-2" id="sort-filter" style="top:-108.8px;left:-177px">
-            <ul class="mar-0 pad-0">
-              <li>Coming Soon</li>
-              <li>Coming Soon</li>
-            </ul>
-          </div>
-          <!-- Snaxe Filters -->
-          <li onclick="openFilter(3)">Snaxii</li>
-          <div class="close bckg-gray-1 pad-2" id="sort-filter" style="top:-108.8px;left:-177px">
-            <ul class="mar-0 pad-0">
-              <li>Coming Soon</li>
-              <li>Coming Soon</li>
-            </ul>
-          </div>
-        </ul>
-      </div>
+  </div>
+  <!-- Filters -->
+  <div id="filter" class="close pos-fx shadow bckg-gray-1">
+    <i class="fas fa-filter txt-orange-2 fa-2x pad-3" onclick="toggle('#filters');openFilter(0)"></i>
+    <div id="filters" class="close pos-abs bckg-gray-1 txt-gray-1 shadow pad-2">
+      <ul class="flex mar-0 pad-0">
+        <!-- Sort -->
+        <li onclick="openFilter(1)">Sort</li>
+        <div class="close bckg-gray-1 pad-2" id="sort-filter" style="top:-108.8px;left:-177px">
+          <ul class="mar-0 pad-0">
+            <li onclick="sort(1)">Hecredex Order</li>
+            <li onclick="sort(2)">Reverse Order</li>
+          </ul>
+        </div>
+        <!-- Bird Filters -->
+        <li onclick="openFilter(2)">Hecretary Birds</li>
+        <div class="close bckg-gray-1 pad-2" id="sort-filter" style="top:-66.4px;left:-177px">
+          <ul class="mar-0 pad-0">
+            <li onclick="filter('Bird')">Just Birds</li>
+          </ul>
+        </div>
+        <!-- Snaxe Filters -->
+        <li onclick="openFilter(3)">Snaxii</li>
+        <div class="close bckg-gray-1 pad-2" id="sort-filter" style="top:-193.6px;left:-177px">
+          <ul class="mar-0 pad-0">
+            <li onclick="filter('Snaxe')">All Snaxii</li>
+            <li onclick="filter(['Snaxe', 'Land'])">Land Snaxii</li>
+            <li onclick="filter(['Snaxe', 'Sea'])">Sea Snaxii</li>
+            <li onclick="filter(['Snaxe', 'Sky'])">Sky Snaxii</li>
+          </ul>
+        </div>
+        <!-- Reset -->
+        <li onclick="reset()">Reset</li>
+      </ul>
     </div>
   </div>
   <!-- Info -->

@@ -33,17 +33,20 @@ function extractInformation(source, listNum) {
     for (var i = 0; i < info.length; i++) {
       info.splice(i, 1);
     }
+    // Divide animals into subclassifications
+    info[2] = info[2].split(", ");
     // Seperate images into their own array
-    info[8] = info[8].split("-");
-    info[8].shift();
+    info[9] = info[9].split("-");
+    info[9].shift();
     createAnimalList(info, listNum);
   }, 'text');
 }
 
 
 function createAnimalList(info, listNum) {
-  $("#list div:nth-child(" + (listNum + 1) + ")").append("<img src=" + info[8][0] + " onclick=\"\">");
-  $("#list div:nth-child(" + (listNum + 1) + ") img").attr("onclick", "switchAnimal(" + (listNum + 1) + "," + JSON.stringify(info) + ", this)")
+  $("#list div:nth-child(" + (listNum + 1) + ")").append("<img src=" + info[9][0] + " info=\"\" onclick=\"\">");
+  $("#list div:nth-child(" + (listNum + 1) + ") img").attr("info", JSON.stringify(info));
+  $("#list div:nth-child(" + (listNum + 1) + ") img").attr("onclick", "switchAnimal(" + (listNum + 1) + ", JSON.parse($(this).attr('info')), this)");
   hash = location.hash.slice(1);
   if (hash == listNum) {
       window.location.hash = 0;
@@ -57,22 +60,22 @@ function switchAnimal(number, info, obj) {
     $(obj).addClass("myVisible");
     // Change Image
     $("#images").html("<i class='fas fa-angle-double-right fa-2x' onclick='nextImage()'></i>");
-    info[8].shift();
-    for (var i = 0; i < info[8].length; i++) {
+    info[9].shift();
+    for (var i = 0; i < info[9].length; i++) {
       if (i == 0)
-        $("#images").append("<img src='" + info[8][i] + "' class='show'>");
+        $("#images").append("<img src='" + info[9][i] + "' class='show'>");
       else
-        $("#images").append("<img src='" + info[8][i] + "' class='hide'>");
+        $("#images").append("<img src='" + info[9][i] + "' class='hide'>");
     }
     // Change Name
     $("#name").html("<h1>" + info[0] + "</h1><p>" + info[1] +"</p>");
     // Set tab to info
     switchTab($("#tab i:first-child"), 1);
     // Fill in all the info
-    $("#text div:nth-child(1)").html(info[4]);
-    $("#text div:nth-child(2)").html(info[5]);
-    $("#text div:nth-child(3)").html(info[6]);
-    $("#text div:nth-child(5)").html(info[7]);
+    $("#text div:nth-child(1)").html(info[5]);
+    $("#text div:nth-child(2)").html(info[6]);
+    $("#text div:nth-child(3)").html(info[7]);
+    $("#text div:nth-child(5)").html(info[8]);
     // Add/Change Hash
     window.location.hash = number - 1;
   }
@@ -140,4 +143,20 @@ function sort(num) {
       $("#list div[number=" + i + "]").appendTo("#list");
     }
   }
+}
+
+function filter(args) {
+  for (var i = 1; i < $("#list div").length; i++) {
+    info = JSON.parse($("#list div:nth-child(" + (i + 1) + ") img").attr("info"));
+    animal = JSON.stringify(info[2]);
+    if (animal.includes(JSON.stringify(args))) {
+      $("#list div:nth-child(" + (i + 1) + ")").removeClass("hidden");
+    } else {
+      $("#list div:nth-child(" + (i + 1) + ")").addClass("hidden");
+    }
+  }
+}
+
+function reset() {
+  $("#list div").removeClass("hidden");
 }
