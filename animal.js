@@ -1,7 +1,12 @@
+// Check Window Size
 if ($(window).width() >= 720) {
   layout("computer");
 }
 
+// Check if there is no hash
+if (location.hash.length == 0) {
+  $("#images").html("<img src='/images/other_creatures/question_mark.jpg' class='show'>");
+}
 
 getSources();
 
@@ -11,7 +16,7 @@ function getSources() {
     sources.pop();
     for (var i = 0; i < sources.length; i++) {
       sources[i] = sources[i].match(/\[([^\]]+)\]/)[1];
-      $("#list ul").append("<li></li>")
+      $("#list").append("<div number='" + (i + 1) + "'></div>")
     }
     for (var i = 0; i < sources.length; i++) {
       extractInformation(sources[i], i + 1);
@@ -37,31 +42,40 @@ function extractInformation(source, listNum) {
 
 
 function createAnimalList(info, listNum) {
-  $("#list ul li:nth-child(" + listNum + ")").append("<img src=" + info[8][0] + " onclick=\"\">");
-  $("#list ul li:nth-child(" + listNum + ") img").attr("onclick", "switchAnimal(" + listNum + "," + JSON.stringify(info) + ", this)")
+  $("#list div:nth-child(" + (listNum + 1) + ")").append("<img src=" + info[8][0] + " onclick=\"\">");
+  $("#list div:nth-child(" + (listNum + 1) + ") img").attr("onclick", "switchAnimal(" + (listNum + 1) + "," + JSON.stringify(info) + ", this)")
+  hash = location.hash.slice(1);
+  if (hash == listNum) {
+      window.location.hash = 0;
+      $("#list div:nth-child(" + (listNum + 1) + ") img").click();
+  }
 }
 
 function switchAnimal(number, info, obj) {
-  $("#list ul li img").removeClass("myVisible");
-  $(obj).addClass("myVisible");
-  // Change Image
-  $("#images").html("<i class='fas fa-angle-double-right fa-2x' onclick='nextImage()'></i>");
-  info[8].shift();
-  for (var i = 0; i < info[8].length; i++) {
-    if (i == 0)
-      $("#images").append("<img src='" + info[8][i] + "' class='show'>");
-    else
-      $("#images").append("<img src='" + info[8][i] + "' class='hide'>");
+  if (location.hash.slice(1) != number - 1) {
+    $("#list div img").removeClass("myVisible");
+    $(obj).addClass("myVisible");
+    // Change Image
+    $("#images").html("<i class='fas fa-angle-double-right fa-2x' onclick='nextImage()'></i>");
+    info[8].shift();
+    for (var i = 0; i < info[8].length; i++) {
+      if (i == 0)
+        $("#images").append("<img src='" + info[8][i] + "' class='show'>");
+      else
+        $("#images").append("<img src='" + info[8][i] + "' class='hide'>");
+    }
+    // Change Name
+    $("#name").html("<h1>" + info[0] + "</h1><p>" + info[1] +"</p>");
+    // Set tab to info
+    switchTab($("#tab i:first-child"), 1);
+    // Fill in all the info
+    $("#text div:nth-child(1)").html(info[4]);
+    $("#text div:nth-child(2)").html(info[5]);
+    $("#text div:nth-child(3)").html(info[6]);
+    $("#text div:nth-child(5)").html(info[7]);
+    // Add/Change Hash
+    window.location.hash = number - 1;
   }
-  // Change Name
-  $("#name").html("<h1>" + info[0] + "</h1><p>" + info[1] +"</p>");
-  // Set tab to info
-  switchTab($("#tab i:first-child"), 1);
-  // Fill in all the info
-  $("#text div:nth-child(1)").html(info[4]);
-  $("#text div:nth-child(2)").html(info[5]);
-  $("#text div:nth-child(3)").html(info[6]);
-  $("#text div:nth-child(5)").html(info[7]);
 }
 
 function nextImage() {
@@ -92,5 +106,38 @@ function layout(type) {
   if (type == "computer") { // Larger Screen
     $("#images").attr("style", "width:calc(50% - 16px);float:left;margin-bottom:16px");
     $("#info > div:nth-child(2)").attr("style", "width:calc(50% - 16px);float:right;margin-bottom:16px");
+  }
+}
+
+function toggle(obj) {
+  if ($(obj).hasClass("open")) {
+    $(obj).addClass("close").removeClass("open")
+  } else {
+    $(obj).addClass("open").removeClass("close")
+  }
+}
+
+function openFilter(child) {
+  if (child != 0) {
+    if ($("#filters div:nth-of-type(" + child + ")").hasClass("open")) {
+      $("#filters div").removeClass("open");
+    } else {
+      $("#filters div").removeClass("open");
+      $("#filters div:nth-of-type(" + child + ")").removeClass("close").addClass("open");
+    }
+  } else {
+    $("#filters div").removeClass("open").addClass("close");
+  }
+}
+
+function sort(num) {
+  if (num == 1) {
+    for (var i = 1; i < $("#list div").length; i++) {
+      $("#list div[number=" + i + "]").appendTo("#list");
+    }
+  } else {
+    for (var i = $("#list div").length; i > 0; i--) {
+      $("#list div[number=" + i + "]").appendTo("#list");
+    }
   }
 }
