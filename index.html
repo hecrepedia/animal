@@ -14,8 +14,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hecrepedia | Animals</title>
   <script type="text/javascript" src="/docs/js/jquery.js" defer></script>
-  <script type="text/javascript" src="/docs/js/main.js" defer></script>
-  <script type="text/javascript" src="animal.js" defer></script>
+  <script type="text/javascript" src="/docs/js/main.min.js" defer></script>
+  <script type="text/javascript" src="animal.min.js" defer></script>
   <link rel="stylesheet" type="text/css" href="/docs/css/turtle.css">
   <link rel="stylesheet" type="text/css" href="/docs/fa/css/all.css">
   <style>
@@ -23,7 +23,7 @@
     #list div{width:100%;max-width:64px;padding:8%}
     #list div img{width:75%;padding:12.5%;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.25);transition:0.3s;background-color:#fff}
     #list div.hidden{display:none}
-    .myVisible{transform:rotate(360deg)}
+    #list div img.active{transform:rotate(360deg)}
 
     /* Images */
     #images img{transition:0.3s}
@@ -144,12 +144,12 @@
         <p>This will have the pronunciaiton</p>
       </div>
       <!-- Tab -->
-      <div class="flex jus-spa shadow bor-rad-2 pad-1" id="tab" style="margin-bottom:16px;flex-direction:row">
-        <i class="fas fa-info-circle active" onclick="switchTab(this, 1)"></i>
-        <i class="fas fa-user" onclick="switchTab(this, 2)"></i>
-        <i class="fas fa-clock" onclick="switchTab(this, 3)"></i>
-        <i class="fas fa-fist-raised" onclick="switchTab(this, 4)"></i>
-        <i class="fas fa-question" onclick="switchTab(this, 5)"></i>
+      <div id="tab" class="flex jus-spa shadow bor-rad-2 pad-1" style="margin-bottom:16px;flex-direction:row">
+        <i class="fas fa-info-circle active" onclick="switchActive(this, '#tab i');switchActive('#text div:nth-child(1)', '#text div')"></i>
+        <i class="fas fa-user" onclick="switchActive(this, '#tab i');switchActive('#text div:nth-child(2)', '#text div')"></i>
+        <i class="fas fa-clock" onclick="switchActive(this, '#tab i');switchActive('#text div:nth-child(3)', '#text div')"></i>
+        <i class="fas fa-fist-raised" onclick="switchActive(this, '#tab i');switchActive('#text div:nth-child(4)', '#text div')"></i>
+        <i class="fas fa-question" onclick="switchActive(this, '#tab i');switchActive('#text div:nth-child(5)', '#text div')"></i>
       </div>
       <!-- Text -->
       <div class="shadow bor-rad-2" id="text">
