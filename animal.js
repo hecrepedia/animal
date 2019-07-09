@@ -194,6 +194,7 @@ function switchAnimal(number, info, obj) {
     switchActive(obj, "#list div img"); // Set the current animal's icon to active
     $("#images").html("<i class='fas fa-angle-double-right fa-2x' onclick='nextImage()'></i>"); // Clear images
     switchActive($("#tab i:first-child"), "#tab i"); // Set tab to info
+    switchActive('#text div:nth-child(1)', '#text div'); // Set text to info
 
     // Loop through and add images
     info[9].shift(); // Delete icon image
