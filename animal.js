@@ -226,6 +226,9 @@ function switchAnimal(number, info, obj) {
           createPower(info, listNum);
         });
     }
+    
+    // Change title
+    $("document").attr("title", info[0]);
   }
 }
 /*
