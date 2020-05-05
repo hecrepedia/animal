@@ -228,7 +228,7 @@ function switchAnimal(number, info, obj) {
     }
     
     // Change title
-    $("document").attr("title", info[0]);
+    $("title").html(info[0]);
   }
 }
 /*
